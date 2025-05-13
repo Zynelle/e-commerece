@@ -9,7 +9,7 @@ class Categorie extends Model
 {
     use HasFactory;
 
-      protected $fillable = ['nom'];
+      protected $guarded = [];
 
     public function produits()
     {
