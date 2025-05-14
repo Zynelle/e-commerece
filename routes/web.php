@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\FournisseurController;
 use App\Http\Controllers\admin\ProduitController;
 use App\Http\Controllers\admin\RapportController;
 use App\Http\Controllers\front\AcceuilController;
+use App\Http\Controllers\front\PanierController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -86,3 +87,9 @@ require __DIR__ . '/auth.php';
 
 
 Route::get('/', [AcceuilController::class, 'index'])->name('acceuil');
+Route::post('/ajouter-au-panier/{id}', [PanierController::class, 'ajouter'])->name('panier.ajouter');
+Route::get('/compteur-panier', [PanierController::class, 'compteur'])->name('panier.compteur');
+Route::delete('/panier/supprimer/{id}', [PanierController::class, 'supprimer'])->name('panier.supprimer');
+Route::get('/mon-panier', [PanierController::class, 'afficher'])->name('panier.afficher');
+Route::post('/panier/update/{id}', [PanierController::class, 'update'])->name('panier.update');
+Route::delete('/panier/supprimer/{id}', [PanierController::class, 'supprimer'])->name('panier.supprimer');

@@ -29,7 +29,6 @@
                                     @foreach($categories as $categorie)
                                     <tr>
                                         <td>{{ $categorie->nom }}</td>
-                                        <td>{{ $categorie->description }}</td>
                                         <td>
                                             @if($categorie->image)
                                                 <img src="{{ Storage::url($categorie->image) }}" width="50" alt="Image">
