@@ -91,7 +91,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#">
+                            <a href="{{ url('admin/produits') }}">
                                 <i class="fas fa-box"></i>
                                 <p>Produits</p>
                             </a>
@@ -108,6 +108,12 @@
                             <a href="{{ url('admin/categories') }}">
                                 <i class="fas fa-tags"></i>
                                 <p>Catégories</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('admin/rapports') }}">
+                                <i class="fas fa-tags"></i>
+                                <p>Rapports</p>
                             </a>
                         </li>
                     </ul>

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\admin\CategorieController;
 use App\Http\Controllers\admin\FournisseurController;
+use App\Http\Controllers\admin\ProduitController;
+use App\Http\Controllers\admin\RapportController;
 use App\Http\Controllers\front\AcceuilController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -56,6 +58,29 @@ Route::middleware('auth')
     Route::patch('fournisseurs/{fournisseur}/status', [FournisseurController::class, 'toggleStatus'])->name('fournisseurs.toggleStatus');
 });
 
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::get('produits', [ProduitController::class, 'index'])->name('produits.index');
+    Route::get('produits/create', [ProduitController::class, 'create'])->name('produits.create');
+    Route::post('produits', [ProduitController::class, 'store'])->name('produits.store');
+    Route::get('produits/{id}', [ProduitController::class, 'show'])->name('produits.show');
+    Route::get('produits/{id}/edit', [ProduitController::class, 'edit'])->name('produits.edit');
+    Route::put('produits/{id}', [ProduitController::class, 'update'])->name('produits.update');
+    Route::delete('produits/{id}', [ProduitController::class, 'destroy'])->name('produits.destroy');
+    Route::post('produits/{id}/reduce-stock', [ProduitController::class, 'reduceStock'])->name('produits.reduceStock');
+    Route::post('produits/{id}/add-stock', [ProduitController::class, 'addStock'])->name('produits.addStock');
+});
+
+
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+
+    Route::get('rapports', [RapportController::class, 'index'])->name('rapports.index');
+    Route::get('rapports/create', [RapportController::class, 'create'])->name('rapports.create');
+    Route::post('rapports', [RapportController::class, 'store'])->name('rapports.store');
+    Route::get('rapports/{id}', [RapportController::class, 'show'])->name('rapports.show');
+    Route::get('rapports/{id}/edit', [RapportController::class, 'edit'])->name('rapports.edit');
+    Route::put('rapports/{id}', [RapportController::class, 'update'])->name('rapports.update');
+    Route::delete('rapports/{id}', [RapportController::class, 'destroy'])->name('rapports.destroy');
+});
 
 require __DIR__ . '/auth.php';
 

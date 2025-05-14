@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('produits', function (Blueprint $table) {
             $table->id();
-               $table->string('nom');
+            $table->string('nom');
             $table->text('description')->nullable();
             $table->decimal('prix', 10, 2);
+            $table->decimal('prix_unitaire', 10, 2);  // Nouveau champ pour le prix unitaire
             $table->integer('quantite')->default(0);
             $table->string('image')->nullable();
             $table->foreignId('fournisseur_id')->constrained('fournisseurs')->onDelete('cascade');

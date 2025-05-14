@@ -10,7 +10,7 @@ class Produit extends Model
     use HasFactory;
 
 
-    protected $unguarded = [];
+protected $fillable = ['nom', 'description', 'prix', 'prix_unitaire', 'quantite', 'image', 'fournisseur_id', 'categorie_id'];
 
     public function fournisseur()
     {
