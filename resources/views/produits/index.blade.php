@@ -62,11 +62,9 @@
                             <thead class="table-light">
                                 <tr>
                                     <th>Nom</th>
-                                    <th>Description</th>
                                     <th>Prix</th>
                                     <th>Quantité</th>
                                     <th>Image</th>
-                                    <th>Fournisseur</th>
                                     <th>Catégorie</th>
                                     <th>Actions</th>
                                 </tr>
@@ -75,7 +73,6 @@
                                 @foreach($produits as $produit)
                                 <tr>
                                     <td>{{ $produit->nom }}</td>
-                                    <td>{{ Str::limit($produit->description, 50) }}</td>
                                     <td>{{ number_format($produit->prix, 2) }} €</td>
                                     <td>{{ $produit->quantite }}</td>
                                     <td>
@@ -85,20 +82,24 @@
                                             <span class="text-muted">Aucune</span>
                                         @endif
                                     </td>
-                                    <td>{{ $produit->fournisseur->nom }}</td>
                                     <td>{{ $produit->categorie->nom }}</td>
                                     <td>
-                                        <a href="{{ route('admin.produits.edit', $produit->id) }}" class="btn btn-sm btn-info">Modifier</a>
+                                        <a href="{{ route('admin.produits.edit', $produit->id) }}" class="btn btn-sm btn-info">Edit</a>
                                         <form action="{{ route('admin.produits.destroy', $produit->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer ce produit ?')">Supprimer</button>
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer ce produit ?')">delete</button>
                                         </form>
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="col-12 mt-4">
+                        <nav>
+                            {{ $produits->links('vendor.pagination.bootstrap-4') }}
+                        </nav>
+                    </div>
                     </div>
 
 

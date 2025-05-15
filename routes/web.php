@@ -6,6 +6,8 @@ use App\Http\Controllers\admin\ProduitController;
 use App\Http\Controllers\admin\RapportController;
 use App\Http\Controllers\front\AcceuilController;
 use App\Http\Controllers\front\PanierController;
+use App\Http\Controllers\front\ShopController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -86,10 +88,32 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 require __DIR__ . '/auth.php';
 
 
+// routes/web.php
+Route::get('/paiement', function () {
+    return view('paiement');
+});
+
+
+
 Route::get('/', [AcceuilController::class, 'index'])->name('acceuil');
+Route::get('/produit/{id}', [AcceuilController::class, 'show'])->name('produit.detail'); // Détail du produit
+Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
+
+
+
 Route::post('/ajouter-au-panier/{id}', [PanierController::class, 'ajouter'])->name('panier.ajouter');
 Route::get('/compteur-panier', [PanierController::class, 'compteur'])->name('panier.compteur');
 Route::delete('/panier/supprimer/{id}', [PanierController::class, 'supprimer'])->name('panier.supprimer');
 Route::get('/mon-panier', [PanierController::class, 'afficher'])->name('panier.afficher');
 Route::post('/panier/update/{id}', [PanierController::class, 'update'])->name('panier.update');
 Route::delete('/panier/supprimer/{id}', [PanierController::class, 'supprimer'])->name('panier.supprimer');
+
+
+
+
+
+
+Route::get('/payment', [PaymentController::class, 'showForm']);
+Route::post('/payment/start', [PaymentController::class, 'redirectToMonetbil']);
+Route::get('/payment/return', [PaymentController::class, 'paymentReturn']);
+Route::post('/payment/notify', [PaymentController::class, 'notify']);

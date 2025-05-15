@@ -61,6 +61,9 @@
                                 <small class="fa fa-star text-primary mr-1"></small>
                                 <small>(99)</small>
                             </div>
+                            <!-- Ajout du bouton Voir Plus -->
+                            <a href="{{ route('produit.detail', ['id' => $produit->id]) }}"
+                                class="btn btn-primary mt-3">Voir Plus</a>
                         </div>
                     </div>
                 </div>

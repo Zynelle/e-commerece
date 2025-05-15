@@ -15,42 +15,42 @@ class ProduitController extends Controller
      * Afficher la liste paginée des produits avec filtres.
      */
     public function index(Request $request)
-    {
-        $query = Produit::query();
+{
+    $query = Produit::query();
 
-        // Filtrer par nom
-        if ($request->filled('nom')) {
-            $query->where('nom', 'like', '%' . $request->nom . '%');
-        }
-
-        // Filtrer par catégorie
-        if ($request->filled('categorie_id')) {
-            $query->where('categorie_id', $request->categorie_id);
-        }
-
-        // Filtrer par fournisseur
-        if ($request->filled('fournisseur_id')) {
-            $query->where('fournisseur_id', $request->fournisseur_id);
-        }
-
-        // Filtrer par prix (min et/ou max)
-        if ($request->filled('prix_min')) {
-            $query->where('prix', '>=', $request->prix_min);
-        }
-
-        if ($request->filled('prix_max')) {
-            $query->where('prix', '<=', $request->prix_max);
-        }
-
-        // Exécuter la requête pour obtenir les produits
-        $produits = $query->get();
-
-        // Récupérer les catégories et les fournisseurs pour les filtres
-        $categories = Categorie::all();
-        $fournisseurs = Fournisseur::all();
-
-        return view('produits.index', compact('produits', 'categories', 'fournisseurs'));
+    // Filtrer par nom
+    if ($request->filled('nom')) {
+        $query->where('nom', 'like', '%' . $request->nom . '%');
     }
+
+    // Filtrer par catégorie
+    if ($request->filled('categorie_id')) {
+        $query->where('categorie_id', $request->categorie_id);
+    }
+
+    // Filtrer par fournisseur
+    if ($request->filled('fournisseur_id')) {
+        $query->where('fournisseur_id', $request->fournisseur_id);
+    }
+
+    // Filtrer par prix (min et/ou max)
+    if ($request->filled('prix_min')) {
+        $query->where('prix', '>=', $request->prix_min);
+    }
+
+    if ($request->filled('prix_max')) {
+        $query->where('prix', '<=', $request->prix_max);
+    }
+
+    // Pagination : 10 produits par page
+    $produits = $query->paginate(4);
+
+    // Récupérer les catégories et les fournisseurs pour les filtres
+    $categories = Categorie::all();
+    $fournisseurs = Fournisseur::all();
+
+    return view('produits.index', compact('produits', 'categories', 'fournisseurs'));
+}
 
 
     /**

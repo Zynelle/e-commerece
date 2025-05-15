@@ -31,4 +31,13 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'monetbil' => [
+    'service_key' => env('MONETBIL_SERVICE_KEY'),
+    'service_secret' => env('MONETBIL_SERVICE_SECRET'),
+    'return_url' => env('MONETBIL_RETURN_URL'),
+    'notify_url' => env('MONETBIL_NOTIFY_URL'),
+    'currency' => env('MONETBIL_CURRENCY', 'XAF'),
+],
+
+
 ];
